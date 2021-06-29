@@ -15,6 +15,7 @@ namespace PlayerView
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+            Time.timeScale = 1;
         }
 
         private void Update()
@@ -35,6 +36,8 @@ namespace PlayerView
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            transform.eulerAngles = new Vector3(0, 0, rb.velocity.y * 5.0f);
         
         
         }
