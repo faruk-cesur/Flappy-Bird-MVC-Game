@@ -1,11 +1,25 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// (MVC) - Controller Burada Tutuluyor.
     public class GameManager : MonoBehaviour
     {
+        private GameManager(){}
         public static GameManager gameManager;
+        
+        private void Awake()
+        {
+            if(gameManager == null)
+            {
+                gameManager = this;
+                DontDestroyOnLoad(this);
+            }
+            else if(gameManager != this)
+            {
+                Destroy(gameObject);
+            }
+        }
 
         public enum GameState
         {
@@ -14,22 +28,19 @@ using UnityEngine.UI;
             GameOver,
         }
 
-        public PlayerController player;
+        public PlayerView player;
         public GameState currentGameState;
         public GameObject prepare;
         public GameObject gameOver;
         public Text scoreText;
         public GameObject scoreboardObject;
 
-        private void Awake()
-        {
-            gameManager = this;
-        }
+
 
         private void Start()
         {
-            Score.scoreboard = 5;
-            scoreText.text = Score.scoreboard.ToString();
+            Model.scoreboard = 0;
+            scoreText.text = Model.scoreboard.ToString();
         }
 
         private void Update()
@@ -110,6 +121,17 @@ using UnityEngine.UI;
         {
             Time.timeScale = 0;
             gameOver.SetActive(true);
+        }
+
+        public void EarnScore()
+        {
+            Model.scoreboard++;
+            scoreText.text = Model.scoreboard.ToString();
+        }
+
+        public void RestartGame()
+        {
+            SceneManager.LoadScene("Game");
         }
 
 

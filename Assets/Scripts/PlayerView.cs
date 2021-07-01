@@ -3,12 +3,11 @@ using UnityEngine;
 
 // (MVC) - View  Burada tutuluyor.
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerView : MonoBehaviour
     {
         public Rigidbody2D rb;
         public float jumpPower;
-        private GameManager _gameManager;
-        
+
 
         private void Start()
         {
@@ -19,7 +18,6 @@ using UnityEngine;
 
         private void Update()
         {
-
         }
         
         
@@ -41,9 +39,9 @@ using UnityEngine;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag == "ScoreArea");
+            if (other.gameObject.CompareTag("ScoreArea"));
             {
-                Debug.Log("Score +1");
+                GameManager.gameManager.EarnScore();
             }
 
         }
