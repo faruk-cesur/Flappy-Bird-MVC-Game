@@ -2,11 +2,11 @@ using System;
 
 // (MVC) - Model Burada tutuluyor.
 
-    public class Score
+    public static class Score
     {
         
         //Score bilgisini tutuyoruz.
-        public int scoreboard
+        public static int scoreboard
         {
             get
             {
@@ -17,17 +17,4 @@ using System;
                 scoreboard = value;
             }
         }
-        
-        public float jumpSpeed
-        {
-            get
-            {
-                return jumpSpeed;
-            }
-            set
-            {
-                jumpSpeed = value;
-            }
-        }
-        
     }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 // (MVC) - Controller Burada Tutuluyor.
     public class GameManager : MonoBehaviour
@@ -10,18 +11,27 @@ using UnityEngine;
         {
             Prepare,
             MainGame,
-            FinishGame,
+            GameOver,
         }
 
         public PlayerController player;
-        private GameState currentGameState;
+        public GameState currentGameState;
         public GameObject prepare;
+        public GameObject gameOver;
+        public Text scoreText;
+        public GameObject scoreboardObject;
 
         private void Awake()
         {
             gameManager = this;
         }
-        
+
+        private void Start()
+        {
+            Score.scoreboard = 5;
+            scoreText.text = Score.scoreboard.ToString();
+        }
+
         private void Update()
         {
             ChangeGameState();
@@ -40,7 +50,7 @@ using UnityEngine;
                         break;
                     case GameState.MainGame:
                         break;
-                    case GameState.FinishGame:
+                    case GameState.GameOver:
                         break;
                 }
 
@@ -61,7 +71,7 @@ using UnityEngine;
                 case GameState.MainGame:
                     MainGame();
                     break;
-                case GameState.FinishGame:
+                case GameState.GameOver:
                     FinishGame();
                     break;
             }
@@ -71,8 +81,12 @@ using UnityEngine;
         // Hazırlık & Başlangıç Aşaması
         private void Prepare()
         {
+            Time.timeScale = 1;
+            gameOver.SetActive(false);
+            scoreboardObject.SetActive(false);
             if (Input.GetMouseButtonDown(0))
             {
+                player.Jump();
                 CurrentGameState = GameState.MainGame;
             }
             player.rb.constraints = RigidbodyConstraints2D.FreezePositionY;
@@ -83,8 +97,8 @@ using UnityEngine;
         // Oynanış Aşaması
         private void MainGame()
         {
+            scoreboardObject.SetActive(true);
             player.rb.constraints = RigidbodyConstraints2D.None;
-            player.rb.constraints = RigidbodyConstraints2D.FreezePositionX;
             prepare.gameObject.SetActive(false);
             player.Jump();
             player.gameObject.transform.eulerAngles = new Vector3(0, 0, player.rb.velocity.y * 5.0f);
@@ -94,7 +108,8 @@ using UnityEngine;
         // Oyun Bitiş Aşaması
         private void FinishGame()
         {
-            
+            Time.timeScale = 0;
+            gameOver.SetActive(true);
         }
 
 

@@ -5,16 +5,17 @@ using UnityEngine;
 
     public class PlayerController : MonoBehaviour
     {
-        public Score _score;
         public Rigidbody2D rb;
-        private float jumpPower;
+        public float jumpPower;
+        private GameManager _gameManager;
         
+
         private void Start()
         {
             jumpPower = 5f;
             rb = GetComponent<Rigidbody2D>();
-            Time.timeScale = 1;
         }
+        
 
         private void Update()
         {
@@ -31,7 +32,19 @@ using UnityEngine;
                 rb.velocity = Vector2.up * jumpPower; 
             }
         }
-    
-    
-    
+
+
+        public void OnCollisionEnter2D(Collision2D other)
+        {
+            GameManager.gameManager.currentGameState = GameManager.GameState.GameOver;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "ScoreArea");
+            {
+                Debug.Log("Score +1");
+            }
+
+        }
     }
