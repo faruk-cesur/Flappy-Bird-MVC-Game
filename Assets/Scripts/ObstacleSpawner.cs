@@ -22,7 +22,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (GameManager.gameManager.currentGameState == GameManager.GameState.MainGame)
+            if (GameManager.gameManager._playerController.CurrentGameState == PlayerController.GameState.MainGame)
             {
                 Instantiate(obstacle, new Vector3(3.3f, Random.Range(minDistance, maxDistance), 0), Quaternion.identity);
                 yield return new WaitForSeconds(2f);

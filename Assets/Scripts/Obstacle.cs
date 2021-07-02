@@ -16,7 +16,7 @@ public class Obstacle : MonoBehaviour
 
    private void MoveObstacle()
    {
-      if (GameManager.gameManager.currentGameState == GameManager.GameState.MainGame)
+      if (GameManager.gameManager._playerController.CurrentGameState == PlayerController.GameState.MainGame)
       {
          transform.position += Vector3.left * moveSpeed * Time.deltaTime;
       }
