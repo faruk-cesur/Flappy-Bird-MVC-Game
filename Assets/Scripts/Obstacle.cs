@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
@@ -19,6 +16,9 @@ public class Obstacle : MonoBehaviour
 
    private void MoveObstacle()
    {
-      transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+      if (GameManager.gameManager.currentGameState == GameManager.GameState.MainGame)
+      {
+         transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+      }
    }
 }

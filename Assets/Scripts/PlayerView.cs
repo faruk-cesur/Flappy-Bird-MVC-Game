@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 // (MVC) - View  Burada tutuluyor.

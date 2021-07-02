@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +12,6 @@ using UnityEngine.UI;
             if(gameManager == null)
             {
                 gameManager = this;
-                DontDestroyOnLoad(this);
             }
             else if(gameManager != this)
             {
@@ -34,13 +32,15 @@ using UnityEngine.UI;
         public GameObject gameOver;
         public Text scoreText;
         public GameObject scoreboardObject;
+        private Model model;
 
 
 
         private void Start()
         {
-            Model.scoreboard = 0;
-            scoreText.text = Model.scoreboard.ToString();
+            model.Score = 0;
+            scoreText.text = model.Score.ToString();
+            prepare.GetComponent<GameObject>();
         }
 
         private void Update()
@@ -125,13 +125,14 @@ using UnityEngine.UI;
 
         public void EarnScore()
         {
-            Model.scoreboard++;
-            scoreText.text = Model.scoreboard.ToString();
+            model.Score++;
+            scoreText.text = model.Score.ToString();
         }
 
         public void RestartGame()
         {
-            SceneManager.LoadScene("Game");
+            Scene scene = SceneManager.GetActiveScene(); 
+            SceneManager.LoadScene(scene.name);
         }
 
 

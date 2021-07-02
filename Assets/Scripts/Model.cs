@@ -1,10 +1,8 @@
-using System;
+using UnityEngine;
 
 // (MVC) - Model Burada tutuluyor.
 
-    public static class Model
+    public class Model
     {
-        
-        //Score bilgisini tutuyoruz.
-        public static int scoreboard { get; set; }
+        public int Score = PlayerPrefs.GetInt("score",0);
     }
