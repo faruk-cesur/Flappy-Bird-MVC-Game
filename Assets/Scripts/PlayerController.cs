@@ -17,19 +17,16 @@ public class PlayerController
     // Oyun durumları arasında switch yapısı ile geçiş yapılıyor ve içindeki metodlar çalıştırılıyor.
     public void ChangeGameState()
     {
-        switch (GameManager.gameManager.currentGameState)
+        switch (GameManager.gameManager.CurrentGameState)
         {
             case GameManager.GameState.Prepare:
                 Prepare();
-                Debug.Log("Prepare");
                 break;
             case GameManager.GameState.MainGame:
                 MainGame();
-                Debug.Log("Maingame");
                 break;
             case GameManager.GameState.GameOver:
                 GameOver();
-                Debug.Log("gameover");
                 break;
         }
     }
@@ -38,20 +35,24 @@ public class PlayerController
     // Oyun Hazırlık & Başlangıç Aşaması
     private void Prepare()
     {
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         GameManager.gameManager.gameOver.SetActive(false);
         GameManager.gameManager.scoreboardObject.SetActive(false);
         playerView.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
         GameManager.gameManager.prepare.gameObject.SetActive(true);
         playerView.transform.position = playerView.transform.up * Mathf.PingPong(Time.time, .5f);
+       
     }
 
 
     // Oyun Oynanış Aşaması
     private void MainGame()
     {
-        
-        //AudioSource.PlayClipAtPoint(GameManager.gameManager.startSound,playerView.gameObject.transform.position);
+        if (!_control)
+        {
+            _control = true;
+            AudioSource.PlayClipAtPoint(GameManager.gameManager.startSound,playerView.gameObject.transform.position);
+        }
         GameManager.gameManager.scoreboardObject.SetActive(true);
         playerView.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         GameManager.gameManager.prepare.gameObject.SetActive(false);
@@ -64,42 +65,11 @@ public class PlayerController
     // Oyun Bitiş Aşaması
     private void GameOver()
     {
-        //AudioSource.PlayClipAtPoint(GameManager.gameManager.deathSound,playerView.gameObject.transform.position);
-       
-        GameManager.gameManager.currentScoreText.text = playerModel.score.ToString();
-        if (!PlayerPrefs.HasKey("HighScore"))
+        if (_control)
         {
-            PlayerPrefs.SetInt("HighScore", playerModel.score);
-            GameManager.gameManager.goldMedal.SetActive(true);
-            GameManager.gameManager.newScore.SetActive(true);
+            _control = false;
+            GameManager.gameManager.LoseGame();
         }
-        if (playerModel.score > PlayerPrefs.GetInt("HighScore"))
-        {
-            PlayerPrefs.SetInt("HighScore", playerModel.score);
-            playerModel.medalScore = playerModel.score + 1;
-        }
-        if (playerModel.medalScore > PlayerPrefs.GetInt("HighScore") )
-        {
-            if (!GameManager.gameManager.goldMedal.activeSelf)
-            {
-                GameManager.gameManager.goldMedal.SetActive(true);
-                GameManager.gameManager.newScore.SetActive(true);
-                AudioSource.PlayClipAtPoint(GameManager.gameManager.highScoreSound,
-                    playerView.gameObject.transform.position);
-            }
-        }
-        else
-        {
-            GameManager.gameManager.silverMedal.SetActive(true);
-        }
-       
-
-        GameManager.gameManager.highScoreText.text = PlayerPrefs.GetInt("HighScore").ToString();
-        Time.timeScale = 0;
-        GameManager.gameManager.gameOver.SetActive(true);
-        GameManager.gameManager.scoreboardObject.SetActive(false);
-       
-
     }
 
 

@@ -16,9 +16,9 @@ public class PlayerView : MonoBehaviour
     // Oyun başlangıç aşamasında tap to start ile MainGame durumuna geçiş yapıyoruz.
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && GameManager.gameManager.currentGameState != GameManager.GameState.GameOver)
+        if (Input.GetMouseButtonDown(0) && GameManager.gameManager.CurrentGameState != GameManager.GameState.GameOver)
         {
-            GameManager.gameManager.currentGameState = GameManager.GameState.MainGame;
+            GameManager.gameManager.CurrentGameState = GameManager.GameState.MainGame;
         }
 
         _playerController.ChangeGameState();
@@ -38,7 +38,7 @@ public class PlayerView : MonoBehaviour
     // Karakterimiz her hangi bir şeye çarparsa GameOver oyun durumuna geçiş yapılır.
     public void OnCollisionEnter2D(Collision2D other)
     {
-        GameManager.gameManager.currentGameState = GameManager.GameState.GameOver;
+        GameManager.gameManager.CurrentGameState = GameManager.GameState.GameOver;
     }
 
 

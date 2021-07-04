@@ -23,7 +23,7 @@ public class Obstacle : MonoBehaviour
     // Obstacle objelerimizin bize doğru hareket etmesini sağlar.
     private void MoveObstacle()
     {
-        if (GameManager.gameManager.currentGameState == GameManager.GameState.MainGame)
+        if (GameManager.gameManager.CurrentGameState == GameManager.GameState.MainGame)
         {
             transform.position += Vector3.left * moveSpeed * Time.deltaTime;
         }
