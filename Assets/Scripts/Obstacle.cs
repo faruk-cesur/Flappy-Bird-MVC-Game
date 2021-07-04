@@ -2,23 +2,30 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-   private float moveSpeed = 2f;
+    // Obstacle objelerimizin hareket hızı değişkeni
+    private float moveSpeed = 2f;
 
-   private void Start()
-   {
-      Destroy(gameObject,4f);
-   }
 
-   private void FixedUpdate()
-   {
-      MoveObstacle();
-   }
+    // Obstacle objelerimizin oluşturulduktan dört saniye sonra yok olmalarını sağlıyoruz. (Performans için)
+    private void Start()
+    {
+        Destroy(gameObject, 4f);
+    }
 
-   private void MoveObstacle()
-   {
-      if (GameManager.gameManager._playerController.CurrentGameState == PlayerController.GameState.MainGame)
-      {
-         transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-      }
-   }
+
+    // MoveObstacle Metodumuzu çağırıp bize doğru hareket etmesini sağlıyoruz
+    private void FixedUpdate()
+    {
+        MoveObstacle();
+    }
+
+
+    // Obstacle objelerimizin bize doğru hareket etmesini sağlar.
+    private void MoveObstacle()
+    {
+        if (GameManager.gameManager.currentGameState == GameManager.GameState.MainGame)
+        {
+            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+        }
+    }
 }

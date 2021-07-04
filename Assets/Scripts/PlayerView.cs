@@ -1,54 +1,53 @@
-using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
-// (MVC) - View  Burada tutuluyor.
+// (MVC Design Pattern) - View Burada tutuluyor.
+public class PlayerView : MonoBehaviour
+{
+    public Rigidbody2D rb;
+    private PlayerController _playerController;
 
-    public class PlayerView : MonoBehaviour
+    private void Start()
     {
-        public Rigidbody2D rb;
-        private PlayerController _playerController;
-        public PlayerController.GameState currentGameState;
-        
-        private void Start()
+        _playerController = GameManager.gameManager._playerController;
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+
+    // Oyun başlangıç aşamasında tap to start ile MainGame durumuna geçiş yapıyoruz.
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && GameManager.gameManager.currentGameState != GameManager.GameState.GameOver)
         {
-            _playerController = GameManager.gameManager._playerController;
-            rb = GetComponent<Rigidbody2D>();
+            GameManager.gameManager.currentGameState = GameManager.GameState.MainGame;
         }
 
+        _playerController.ChangeGameState();
+    }
 
-        private void Update()
+
+    // Tıklama inputu alır ve karşılığında controllerdan zıplama metodu çağırır.
+    public void Jump()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                currentGameState = PlayerController.GameState.MainGame;
-            }
-
-            _playerController.ChangeGameState();
-        }
-
-
-        // Her tıklandığında kuş zıplar (MainGame State)
-        public void Jump()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _playerController.Jumping();
-            }
-        }
-
-
-        public void OnCollisionEnter2D(Collision2D other)
-        {
-            _playerController.CurrentGameState = PlayerController.GameState.GameOver;
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.gameObject.CompareTag("ScoreArea"));
-            {
-                _playerController.EarnScore();
-            }
-
+            _playerController.Jumping();
         }
     }
+
+
+    // Karakterimiz her hangi bir şeye çarparsa GameOver oyun durumuna geçiş yapılır.
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        GameManager.gameManager.currentGameState = GameManager.GameState.GameOver;
+    }
+
+
+    // Karakterimiz obstacle objelerin arasından geçtiği zaman puan kazanır.
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("ScoreArea")) ;
+        {
+            _playerController.EarnScore();
+        }
+    }
+}
