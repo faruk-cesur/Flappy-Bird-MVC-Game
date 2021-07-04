@@ -841,7 +841,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2449e2f391f1df41bfad4f5d8c4ca7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGameState: 0
   scoreText: {fileID: 637542183}
   highScoreText: {fileID: 1748869846}
   currentScoreText: {fileID: 256542800}
@@ -854,9 +853,10 @@ MonoBehaviour:
   scoreSound: {fileID: 8300000, guid: f086fa9c003994b41aed9236966232d3, type: 3}
   jumpSound: {fileID: 8300000, guid: e5ff5d10940f3c8468e25f5a6a662eef, type: 3}
   deathSound: {fileID: 8300000, guid: 6c56513de8460e84bba0ed216df2d456, type: 3}
-  startSound: {fileID: 8300000, guid: 89298068a897c8c4c8ab631e2b2af042, type: 3}
+  startSound: {fileID: 8300000, guid: de571f2593cb6e94d9cbb8cd7c86a7ba, type: 3}
   highScoreSound: {fileID: 8300000, guid: e89de698d8bc92841bbe6211d4aa7bed, type: 3}
   player: {fileID: 1715114383}
+  groundAnimator: {fileID: 1647846679}
 --- !u!4 &584693731
 Transform:
   m_ObjectHideFlags: 0

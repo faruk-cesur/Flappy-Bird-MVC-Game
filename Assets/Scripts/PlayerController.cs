@@ -62,6 +62,8 @@ public class PlayerController
     }
 
     private bool _control;
+    
+    
     // Oyun Bitiş Aşaması
     private void GameOver()
     {

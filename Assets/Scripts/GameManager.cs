@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         GameOver,
     }
 
-    // Değişkenler ve referanslar alındı
+    // GameState Get&Set Property
     private GameState _currentGameState;
     public GameState CurrentGameState
     {
@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
             _currentGameState = value;
         }
     }
+    
+    // Değişkenler ve referanslar alındı
     public Text scoreText;
     public Text highScoreText;
     public Text currentScoreText;
@@ -72,13 +74,15 @@ public class GameManager : MonoBehaviour
     private PlayerModel playerModel;
     public Animator groundAnimator;
 
-    // Oyun durumu güncellemesi sürekli olarak kontrol ediliyor.
+    
 
     private void Start()
     {
         playerModel = _playerController.playerModel;
     }
 
+    
+    // Oyun durumu güncellemesi sürekli olarak kontrol ediliyor.
     private void Update()
     {
         _playerController.ChangeGameState();
@@ -92,11 +96,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
+    // Oyunda öldüğümüzde çağırdığımız coroutine
     public void LoseGame()
     {
         StartCoroutine(LoseGameControl());
     }
 
+    
+    // Oyunda öldüğümüzde çalışan coroutine
     IEnumerator LoseGameControl()
     {
         player.GetComponent<Animator>().enabled = false;
