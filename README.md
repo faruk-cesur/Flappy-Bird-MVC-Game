@@ -5,7 +5,7 @@ https://user-images.githubusercontent.com/74262200/126029982-672478e4-8eb2-4fe2-
 
 
 ---
-# I developed a clone of the Flappy Bird game from scratch with to improve myself. I used MVC Design Pattern for it. I hope you like it :)
+# I developed a clone of the Flappy Bird game from scratch to improve myself. I used MVC Design Pattern for it. I hope you like it :)
 - Articles about MVC Design Pattern =>
 [Reference Link 1](https://www.toptal.com/unity-unity3d/unity-with-mvc-how-to-level-up-your-game-development)
 [Reference Link 2](https://www.jacksondunstan.com/articles/3092)
