@@ -1,8 +1,13 @@
+
+
+
+
 # Flappy Bird with MVC Design Pattern
 ### This repository is created for Patika.dev Mobile Game Bootcamp V (Week 3 Homework)
-### [Click To Watch Full Screen](https://vimeo.com/570916826)
-![](https://videoapi-muybridge.vimeocdn.com/animated-thumbnails/image/80df9b3e-bcf6-4c02-8f97-40f0547b3e33.gif?ClientID=vimeo-core-prod&Date=1625411535&Signature=f565eb2dd63b934e67f4ea16a3cd01c1dc0e2a3c)
 ---
+https://user-images.githubusercontent.com/74262200/126029982-672478e4-8eb2-4fe2-b3ee-064b08a5d84a.mp4
+
+
 ---
 # The goal is to build this game with MVC Design Pattern
 - Articles about MVC Design Pattern =>
